@@ -1,8 +1,37 @@
-import Vue from 'vue'
-import App from './App.vue'
+/* eslint-disable */
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import router from './router';
+import store from './store';
+import App from './App';
 
-Vue.config.productionTip = false
+import './sass/app.scss'
+
+Vue.use(VueRouter);
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth) {
+    store.dispatch('fetchRole').then(
+      sucess => {
+        if (to.meta.role == sucess) {
+          next();
+        } else {
+          next('/accessdenied');
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  } else {
+    next();
+  }
+});

@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>mynews-client</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but mynews-client doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel='stylesheet' href='https://unpkg.com/bulma@0.7.4/css/bulma.min.css'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <title>Token Manager</title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but mynews-client doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+  </noscript>
+
+  <div id="app">
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script>
+    window.addEventListener('resize', () => {
+      const divs = document.querySelectorAll(".menu-list");
+      if (window.innerWidth < 768) {
+        divs.forEach(div => div.classList.add("tags"));
+      }
+      else {
+        divs.forEach(div => div.classList.remove("tags"));
+      }
+    });
+
+    // ===== Scroll to Top ==== 
+    $(window).scroll(function () {
+      if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200);    // Fade in the arrow
+      } else {
+        $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+      }
+    });
+    $('#return-to-top').click(function () {      // When arrow is clicked
+      $('body,html').animate({
+        scrollTop: 0                       // Scroll to top of body
+      }, 500);
+    });
+  </script>
+</body>
+
 </html>
